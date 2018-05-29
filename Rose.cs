@@ -3,30 +3,39 @@ using System.Collections.Generic;
 
 namespace _20180320_Task1_Pattern_Observer
 {
-    class RoseChoice
+    internal class RoseChoice
     {
         public string Choice { get; set; }
     }
 
-    class Rose : IObservable
+    internal class Rose : IObservable
     {
-        RoseChoice notice; // Выбор жениха
+        private readonly RoseChoice notice;   // The choice of the groom
+        private readonly List<IObserver> observers;
 
-        List<IObserver> observers;
-
+        /// <summary>
+        /// The constructor of the Rose class.
+        /// </summary>
         public Rose()
         {
             observers = new List<IObserver>();
             notice = new RoseChoice();
         }
 
-        // Регистрация наблюдателей
-        public void RegisterObserver(IObserver o)
+        /// <inheritdoc />
+        /// <summary>
+        /// Observer registration.
+        /// </summary>
+        /// <param name="observer">Observer.</param>
+        public void RegisterObserver(IObserver observer)
         {
-            observers.Add(o);
+            observers.Add(observer);
         }
 
-        // Уведомление наблюдателей
+        /// <inheritdoc />
+        /// <summary>
+        /// Notification of observers.
+        /// </summary>
         public void NotifyObservers()
         {
             foreach (IObserver o in observers)
@@ -35,22 +44,25 @@ namespace _20180320_Task1_Pattern_Observer
             }
         }
 
-        // Метод, сигнализирующий о запуске события
+        /// <summary>
+        /// A method that signals the start of an event.
+        /// </summary>
         public void FlirtEvent()
         {
             Random rnd = new Random();
-            if (rnd.Next(1, 3) == 1)   // 1 - выбор Jack'a, 2 - выбор Billy
+
+            if (rnd.Next(1, 3) == 1)   // 1 - choice in favor of Jack, 2 - choice in favor of Billy
             {
-                Console.WriteLine("Rose сделала выбор в пользу Jack'a\n");
+                Console.WriteLine("Rose opted for Jack\n");
                 notice.Choice = "Jack";
             }
             else
             {
-                Console.WriteLine("Rose сделала выбор в пользу Billy\n");
+                Console.WriteLine("Rose opted for Billy\n");
                 notice.Choice = "Billy";
             }
 
-            NotifyObservers();   // Уведомление Jack'a и Billy о своем выборе
+            NotifyObservers();   // Notification for subscribers about the chosen groom.
         }
     }
 }

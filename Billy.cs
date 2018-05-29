@@ -2,19 +2,21 @@
 
 namespace _20180320_Task1_Pattern_Observer
 {
-    class Billy : IObserver
+    internal class Billy : IObserver
     {
         public string Name { get; set; }
-        IObservable Rose;
 
         public Billy(string name, IObservable obs)
         {
             Name = name;
-            Rose = obs;
-            Rose.RegisterObserver(this);
+            obs.RegisterObserver(this);
         }
 
-        // Метод обработчик события.
+        /// <inheritdoc />
+        /// <summary>
+        /// The event handler method.
+        /// </summary>
+        /// <param name="ob">The name of the chosen groom.</param>
         public void Update(object ob)
         {
             RoseChoice notice = (RoseChoice)ob;
@@ -22,13 +24,13 @@ namespace _20180320_Task1_Pattern_Observer
             if (notice.Choice == "Billy")
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine($"{Name} теперь встречается с Rose");
+                Console.WriteLine($"{Name} now meets with Rose");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
             else
             {
-                Console.WriteLine($"{Name} расстроился и убежал...");
-                Console.WriteLine($"Rose больше не общается с {Name}");
+                Console.WriteLine($"{Name} has upset and ran away...");
+                Console.WriteLine($"Rose no longer communicates with {Name}");
             }
         }
     }

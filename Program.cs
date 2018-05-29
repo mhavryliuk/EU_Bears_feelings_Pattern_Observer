@@ -1,22 +1,21 @@
 ﻿using System;
 
-// Паттерн "Наблюдатель" (Observer)
-// https://metanit.com/sharp/patterns/3.2.php
+// Pattern "Observer": https://metanit.com/sharp/patterns/3.2.php
 
 namespace _20180320_Task1_Pattern_Observer
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            // Создание издателя.
+            // Create a publisher.
             Rose Rose = new Rose();
 
-            // Создание подписчиков.
+            // Create subscribers.
             Billy Billy = new Billy("Billy", Rose);
             Jack Jack = new Jack("Jack", Rose);
 
-            // Запуск метода обработчика события.
+            // Run the event handler method.
             Rose.FlirtEvent();            
 
             Console.Read();

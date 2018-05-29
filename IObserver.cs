@@ -1,9 +1,11 @@
-﻿using System;
-
-namespace _20180320_Task1_Pattern_Observer
+﻿namespace _20180320_Task1_Pattern_Observer
 {
-    interface IObserver
+    public interface IObserver
     {
-        void Update(Object ob);
+        /// <summary>
+        /// The event handler method.
+        /// </summary>
+        /// <param name="ob">The name of the chosen groom.</param>
+        void Update(object ob);
     }
 }
